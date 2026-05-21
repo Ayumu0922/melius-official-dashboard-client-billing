@@ -3,7 +3,6 @@ import type { ReactNode } from 'react';
 import type { LucideIcon } from 'lucide-react';
 import {
   AlertTriangle,
-  ArrowUpDown,
   BarChart3,
   Bell,
   Briefcase,
@@ -15,7 +14,6 @@ import {
   Download,
   FileCheck2,
   FileText,
-  Filter,
   Home,
   Landmark,
   Menu,
@@ -51,7 +49,6 @@ import {
   SecondaryButton,
   SidebarHeader,
   SidebarShell,
-  TabButton,
   WorkspaceFrame,
   WorkspaceHeader,
 } from './components/ui';
@@ -1042,6 +1039,11 @@ function SidebarContent({
                   onClick={() => {
                     if (workspaceTab) {
                       onSelectTab(workspaceTab);
+                      if (children.length > 0 && !expandedItems[item.id]) {
+                        onToggleExpanded(item.id);
+                      }
+                      onCloseMobile?.();
+                      return;
                     }
                     if (children.length > 0) {
                       onToggleExpanded(item.id);
@@ -1136,6 +1138,99 @@ function SectionTitle({ title, action, actionId, onAction }: { title: string; ac
           {action}
         </GhostButton>
       ) : null}
+    </div>
+  );
+}
+
+function getViewMeta(tab: TabId, language: Language): { title: string; body: string; icon: LucideIcon; badge: string } {
+  switch (tab) {
+    case 'clients':
+      return {
+        title: localized(language, 'Clients', '顧客'),
+        body: localized(language, 'Last contact, unanswered work, and revenue forecast by account.', '最終連絡日、未対応、売上見込みを顧客ごとに確認します。'),
+        icon: Users,
+        badge: localized(language, 'Account desk', '顧客台帳'),
+      };
+    case 'projects':
+      return {
+        title: localized(language, 'Projects', '案件'),
+        body: localized(language, 'Delivery progress, due dates, owner load, and expected margin.', '進捗、納期、担当、粗利見込みを案件単位で管理します。'),
+        icon: Briefcase,
+        badge: localized(language, 'Delivery board', '案件進行'),
+      };
+    case 'invoices':
+      return {
+        title: localized(language, 'Invoices', '請求'),
+        body: localized(language, 'Quotes, drafts, sent invoices, payment waiting items, and overdue recovery.', '見積、下書き、送付済み、入金待ち、期限超過を処理します。'),
+        icon: Receipt,
+        badge: localized(language, 'A/R queue', '請求回収'),
+      };
+    case 'reports':
+      return {
+        title: localized(language, 'Reports', 'レポート'),
+        body: localized(language, 'Revenue, project margin, utilization, and collection status.', '月次売上、案件別粗利、稼働、請求回収状況を確認します。'),
+        icon: BarChart3,
+        badge: localized(language, 'Management report', '経営レポート'),
+      };
+    case 'overview':
+    default:
+      return {
+        title: localized(language, 'Overview', '概要'),
+        body: localized(language, 'Today’s operating surface for billing, projects, clients, and weekly tasks.', '請求、案件、顧客、今週のタスクを確認する業務面です。'),
+        icon: Home,
+        badge: localized(language, 'Daily desk', '本日の業務'),
+      };
+  }
+}
+
+function ActiveViewHeader({
+  copy,
+  language,
+  activeTab,
+  onCollectPayment,
+  onNewInvoice,
+}: {
+  copy: AppCopy;
+  language: Language;
+  activeTab: TabId;
+  onCollectPayment: () => void;
+  onNewInvoice: () => void;
+}) {
+  const view = getViewMeta(activeTab, language);
+  const Icon = view.icon;
+
+  return (
+    <div
+      data-melius-ui-id="workspace-view-header"
+      data-melius-ui-role="header"
+      className="mb-5 grid gap-4 border-b border-stone-950/[0.14] pb-4 dark:border-white/[0.10] lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end"
+    >
+      <div className="flex min-w-0 items-start gap-3">
+        <span className="mt-0.5 grid h-10 w-10 shrink-0 place-items-center rounded-sm border border-stone-950/[0.12] bg-[#fffdf7] text-zinc-800 dark:border-white/[0.10] dark:bg-white/[0.07] dark:text-zinc-100">
+          <Icon className="h-5 w-5" aria-hidden="true" />
+        </span>
+        <div className="min-w-0">
+          <div data-melius-ui-id="workspace-view-badge" data-melius-ui-role="text" className="text-xs font-black uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">
+            {view.badge}
+          </div>
+          <h2 data-melius-ui-id="workspace-view-title" data-melius-ui-role="heading" className="mt-1 text-2xl font-black leading-tight text-zinc-950 dark:text-white">
+            {view.title}
+          </h2>
+          <p data-melius-ui-id="workspace-view-description" data-melius-ui-role="text" className="mt-1 max-w-2xl text-sm font-medium leading-5 text-zinc-600 dark:text-zinc-300">
+            {view.body}
+          </p>
+        </div>
+      </div>
+      <div data-melius-ui-id="workspace-primary-actions" data-melius-ui-role="actions" className="hidden gap-2 lg:flex">
+        <SecondaryButton dataId="collect-payment-action" roleName="button" onClick={onCollectPayment}>
+          <Wallet className="h-4 w-4" aria-hidden="true" />
+          {copy.collectPayment}
+        </SecondaryButton>
+        <PrimaryButton dataId="new-invoice-action" roleName="button" onClick={onNewInvoice}>
+          <Plus className="h-4 w-4" aria-hidden="true" />
+          {copy.newInvoice}
+        </PrimaryButton>
+      </div>
     </div>
   );
 }
@@ -2576,35 +2671,13 @@ function App() {
           </WorkspaceHeader>
 
           <main data-melius-ui-id="workspace-main" data-melius-ui-role="main" className="thin-scrollbar min-h-0 flex-1 overflow-y-auto p-4 sm:p-5 xl:p-6">
-            <div className="mb-5 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-              <div
-                data-melius-ui-id="workspace-tabs"
-                data-melius-ui-role="tabs"
-                className="thin-scrollbar flex w-full items-center gap-6 overflow-x-auto border-b border-stone-950/[0.14] dark:border-white/[0.10] lg:max-w-[680px]"
-              >
-                {tabs.map((tab) => (
-                  <TabButton
-                    key={tab}
-                    dataId={`tab-${tab}`}
-                    roleName="tab"
-                    selected={activeTab === tab}
-                    onClick={() => navigateTab(tab)}
-                  >
-                    {copy.tabs[tab]}
-                  </TabButton>
-                ))}
-              </div>
-              <div data-melius-ui-id="workspace-primary-actions" data-melius-ui-role="actions" className="hidden gap-2 lg:flex">
-                <SecondaryButton dataId="collect-payment-action" roleName="button" onClick={() => openUtilityAction(copy.collectPayment, localized(language, 'Payment collection is filtered to waiting and overdue invoices.', '入金待ちと期限超過の請求を回収対象として表示しました。'), Wallet, 'modal')}>
-                  <Wallet className="h-4 w-4" aria-hidden="true" />
-                  {copy.collectPayment}
-                </SecondaryButton>
-                <PrimaryButton dataId="new-invoice-action" roleName="button" onClick={() => openUtilityAction(copy.newInvoice, localized(language, 'Invoice setup includes client, project, tax, and due date fields.', '請求作成には顧客、案件、税、支払期限の項目があります。'), Plus, 'modal')}>
-                  <Plus className="h-4 w-4" aria-hidden="true" />
-                  {copy.newInvoice}
-                </PrimaryButton>
-              </div>
-            </div>
+            <ActiveViewHeader
+              copy={copy}
+              language={language}
+              activeTab={activeTab}
+              onCollectPayment={() => openUtilityAction(copy.collectPayment, localized(language, 'Payment collection is filtered to waiting and overdue invoices.', '入金待ちと期限超過の請求を回収対象として表示しました。'), Wallet, 'modal')}
+              onNewInvoice={() => openUtilityAction(copy.newInvoice, localized(language, 'Invoice setup includes client, project, tax, and due date fields.', '請求作成には顧客、案件、税、支払期限の項目があります。'), Plus, 'modal')}
+            />
             <div className="content-rise">{renderContent()}</div>
           </main>
         </div>
