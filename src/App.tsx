@@ -792,32 +792,32 @@ function ToneIcon({ tone, icon: Icon }: { tone: Tone; icon: LucideIcon }) {
   switch (tone) {
     case 'emerald':
       return (
-        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-emerald-100 text-emerald-800 dark:bg-emerald-300/[0.14] dark:text-emerald-200">
+        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-sm bg-emerald-100 text-emerald-800 dark:bg-emerald-300/[0.14] dark:text-emerald-200">
           <Icon className="h-5 w-5" aria-hidden="true" />
         </span>
       );
     case 'amber':
       return (
-        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-amber-100 text-amber-800 dark:bg-amber-300/[0.14] dark:text-amber-200">
+        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-sm bg-amber-100 text-amber-800 dark:bg-amber-300/[0.14] dark:text-amber-200">
           <Icon className="h-5 w-5" aria-hidden="true" />
         </span>
       );
     case 'rose':
       return (
-        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-rose-100 text-rose-800 dark:bg-rose-300/[0.14] dark:text-rose-200">
+        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-sm bg-rose-100 text-rose-800 dark:bg-rose-300/[0.14] dark:text-rose-200">
           <Icon className="h-5 w-5" aria-hidden="true" />
         </span>
       );
     case 'stone':
       return (
-        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-stone-200 text-stone-800 dark:bg-stone-300/[0.14] dark:text-stone-200">
+        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-sm bg-stone-200 text-stone-800 dark:bg-stone-300/[0.14] dark:text-stone-200">
           <Icon className="h-5 w-5" aria-hidden="true" />
         </span>
       );
     case 'neutral':
     default:
       return (
-        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-zinc-100 text-zinc-800 dark:bg-zinc-300/[0.12] dark:text-zinc-200">
+        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-sm bg-zinc-100 text-zinc-800 dark:bg-zinc-300/[0.12] dark:text-zinc-200">
           <Icon className="h-5 w-5" aria-hidden="true" />
         </span>
       );
@@ -872,7 +872,7 @@ function LanguageSwitcher({
       data-melius-ui-id="language-switcher"
       data-melius-ui-role="control"
       aria-label={copy.language.label}
-      className="hidden h-9 items-center rounded-lg border border-zinc-950/[0.08] bg-white/[0.70] p-1 text-xs font-black text-zinc-600 backdrop-blur dark:border-white/[0.10] dark:bg-white/[0.06] dark:text-zinc-300 sm:inline-flex"
+      className="hidden h-9 items-center rounded-md border border-stone-950/[0.12] bg-[#fffdf7] p-1 text-xs font-black text-zinc-600 dark:border-white/[0.10] dark:bg-white/[0.06] dark:text-zinc-300 sm:inline-flex"
     >
       <LanguageOptionButton selected={language === 'ja'} label={copy.language.ja} onClick={() => onLanguageChange('ja')} />
       <LanguageOptionButton selected={language === 'en'} label={copy.language.en} onClick={() => onLanguageChange('en')} />
@@ -920,7 +920,7 @@ function ThemeSwitcher({
       data-melius-ui-id="theme-switcher"
       data-melius-ui-role="control"
       aria-label={copy.theme.label}
-      className="hidden h-9 items-center rounded-lg border border-zinc-950/[0.08] bg-white/[0.70] p-1 text-xs font-black text-zinc-600 backdrop-blur dark:border-white/[0.10] dark:bg-white/[0.06] dark:text-zinc-300 lg:inline-flex"
+      className="hidden h-9 items-center rounded-md border border-stone-950/[0.12] bg-[#fffdf7] p-1 text-xs font-black text-zinc-600 dark:border-white/[0.10] dark:bg-white/[0.06] dark:text-zinc-300 lg:inline-flex"
     >
       <ThemeOptionButton selected={theme === 'light'} label={copy.theme.light} onClick={() => onThemeChange('light')} icon={Sun} />
       <ThemeOptionButton selected={theme === 'system'} label={copy.theme.system} onClick={() => onThemeChange('system')} icon={Monitor} />
@@ -1095,7 +1095,7 @@ function SidebarContent({
                           );
                           onCloseMobile?.();
                         }}
-                        className="block w-full rounded-lg px-3 py-2 text-left text-sm font-semibold text-zinc-500 transition-colors hover:bg-zinc-950/[0.05] hover:text-zinc-950 dark:text-zinc-400 dark:hover:bg-white/[0.09] dark:hover:text-white"
+                        className="block w-full rounded-sm border-l-2 border-transparent px-3 py-2 text-left text-sm font-semibold text-zinc-500 transition-colors hover:border-stone-400 hover:bg-white/[0.45] hover:text-zinc-950 dark:text-zinc-400 dark:hover:border-stone-500 dark:hover:bg-white/[0.08] dark:hover:text-white"
                       >
                         {child}
                       </button>
@@ -1170,8 +1170,8 @@ function FilterButton({
       onClick={onClick}
       className={
         selected
-          ? 'inline-flex min-h-9 items-center justify-center gap-2 rounded-lg border border-zinc-950 bg-zinc-950 px-3.5 py-2 text-sm font-bold text-white shadow-sm shadow-zinc-950/10 dark:border-white dark:bg-white dark:text-zinc-950'
-          : 'inline-flex min-h-9 items-center justify-center gap-2 rounded-lg border border-zinc-950/[0.10] bg-white/[0.74] px-3.5 py-2 text-sm font-bold text-zinc-800 backdrop-blur transition duration-200 hover:-translate-y-0.5 hover:bg-white dark:border-white/[0.12] dark:bg-white/[0.08] dark:text-zinc-100 dark:hover:bg-white/[0.13]'
+          ? 'inline-flex min-h-9 items-center justify-center gap-2 rounded-md border border-zinc-950 bg-zinc-950 px-3.5 py-2 text-sm font-bold text-white shadow-sm shadow-zinc-950/10 dark:border-amber-100 dark:bg-amber-100 dark:text-zinc-950'
+          : 'inline-flex min-h-9 items-center justify-center gap-2 rounded-md border border-stone-950/[0.12] bg-[#fffdf7] px-3.5 py-2 text-sm font-bold text-zinc-800 transition-colors hover:bg-white dark:border-white/[0.12] dark:bg-white/[0.07] dark:text-zinc-100 dark:hover:bg-white/[0.12]'
       }
     >
       {Icon ? <Icon className="h-4 w-4" aria-hidden="true" /> : null}
@@ -1184,7 +1184,7 @@ function EmptyState({ dataId, title, body }: { dataId: string; title: string; bo
   return (
     <PanelSurface data-melius-ui-id={dataId} data-melius-ui-role="empty-state">
       <div className="p-8 text-center">
-        <div className="mx-auto grid h-11 w-11 place-items-center rounded-lg bg-zinc-950/[0.06] text-zinc-700 dark:bg-white/[0.10] dark:text-zinc-200">
+        <div className="mx-auto grid h-11 w-11 place-items-center rounded-sm bg-zinc-950/[0.06] text-zinc-700 dark:bg-white/[0.10] dark:text-zinc-200">
           <Search className="h-5 w-5" aria-hidden="true" />
         </div>
         <h3 className="mt-4 text-base font-black text-zinc-950 dark:text-white">{title}</h3>
@@ -1308,8 +1308,8 @@ function SummaryBand({
   onOpenPanel: OpenPanelHandler;
 }) {
   return (
-    <section data-melius-ui-id="workspace-summary-band" data-melius-ui-role="summary" className="overflow-hidden rounded-lg border border-zinc-950/[0.08] bg-white/[0.86] backdrop-blur-xl dark:border-white/[0.08] dark:bg-white/[0.055]">
-      <div className="grid gap-4 border-b border-zinc-950/[0.08] p-5 dark:border-white/[0.08] lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
+    <section data-melius-ui-id="workspace-summary-band" data-melius-ui-role="summary" className="overflow-hidden rounded-md border border-stone-950/[0.14] bg-[#fffdf8] shadow-sm shadow-stone-950/[0.04] dark:border-white/[0.09] dark:bg-white/[0.055]">
+      <div className="grid gap-5 border-b border-stone-950/[0.12] p-5 dark:border-white/[0.08] lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-stretch">
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-2">
             <Badge>{copy.overview.updated}</Badge>
@@ -1322,26 +1322,50 @@ function SummaryBand({
             {copy.overview.body}
           </p>
         </div>
-        <div data-melius-ui-id="summary-actions" data-melius-ui-role="actions" className="flex flex-wrap gap-2">
-          <PrimaryButton
-            dataId="summary-primary-action"
-            roleName="button"
-            onClick={() => onOpenPanel(getUtilityPanel(copy.overview.primary, localized(language, 'Draft invoices are grouped by ready-to-bill project work.', '請求可能な案件作業を下書き請求として整理しました。'), copy, language, Receipt), undefined, undefined, 'modal')}
-          >
-            <Receipt className="h-4 w-4" aria-hidden="true" />
-            {copy.overview.primary}
-          </PrimaryButton>
-          <SecondaryButton
-            dataId="summary-secondary-action"
-            roleName="button"
-            onClick={() => onOpenPanel(getUtilityPanel(copy.overview.secondary, localized(language, 'Late projects and overdue invoices are ready for review.', '遅延案件と期限超過請求を確認できます。'), copy, language, AlertTriangle))}
-          >
-            <AlertTriangle className="h-4 w-4" aria-hidden="true" />
-            {copy.overview.secondary}
-          </SecondaryButton>
+        <div className="space-y-3">
+          <div data-melius-ui-id="accounts-receivable-aging" data-melius-ui-role="status" className="rounded-sm border border-stone-950/[0.12] bg-stone-950/[0.035] p-3 dark:border-white/[0.10] dark:bg-white/[0.045]">
+            <div className="flex items-center justify-between gap-3">
+              <span className="text-xs font-black uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">
+                {localized(language, 'A/R aging', '売掛年齢')}
+              </span>
+              <span className="text-xs font-bold text-emerald-700 dark:text-emerald-200">
+                {localized(language, 'Recovery 86%', '回収率 86%')}
+              </span>
+            </div>
+            <div className="mt-3 grid grid-cols-3 divide-x divide-stone-950/[0.10] text-sm dark:divide-white/[0.10]">
+              {[
+                { label: '0-15', value: '¥1.31M' },
+                { label: '16-30', value: '¥420K' },
+                { label: '31+', value: '¥240K' },
+              ].map((item) => (
+                <div key={item.label} className="px-2 first:pl-0 last:pr-0">
+                  <div className="text-xs font-black uppercase tracking-[0.12em] text-zinc-500 dark:text-zinc-400">{item.label}</div>
+                  <div className="mt-1 font-black text-zinc-950 dark:text-white">{item.value}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div data-melius-ui-id="summary-actions" data-melius-ui-role="actions" className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+            <PrimaryButton
+              dataId="summary-primary-action"
+              roleName="button"
+              onClick={() => onOpenPanel(getUtilityPanel(copy.overview.primary, localized(language, 'Draft invoices are grouped by ready-to-bill project work.', '請求可能な案件作業を下書き請求として整理しました。'), copy, language, Receipt), undefined, undefined, 'modal')}
+            >
+              <Receipt className="h-4 w-4" aria-hidden="true" />
+              {copy.overview.primary}
+            </PrimaryButton>
+            <SecondaryButton
+              dataId="summary-secondary-action"
+              roleName="button"
+              onClick={() => onOpenPanel(getUtilityPanel(copy.overview.secondary, localized(language, 'Late projects and overdue invoices are ready for review.', '遅延案件と期限超過請求を確認できます。'), copy, language, AlertTriangle))}
+            >
+              <AlertTriangle className="h-4 w-4" aria-hidden="true" />
+              {copy.overview.secondary}
+            </SecondaryButton>
+          </div>
         </div>
       </div>
-      <div data-melius-ui-id="summary-kpi-grid" data-melius-ui-role="metrics" className="grid grid-cols-1 divide-y divide-zinc-950/[0.08] dark:divide-white/[0.08] sm:grid-cols-2 sm:divide-x sm:divide-y-0 xl:grid-cols-5">
+      <div data-melius-ui-id="summary-kpi-grid" data-melius-ui-role="metrics" className="grid grid-cols-1 divide-y divide-stone-950/[0.12] dark:divide-white/[0.08] sm:grid-cols-2 sm:divide-x sm:divide-y-0 xl:grid-cols-5">
         {summaryMetrics.map((metric) => (
           <button
             key={metric.id}
@@ -1349,7 +1373,7 @@ function SummaryBand({
             data-melius-ui-id={`summary-kpi-${metric.id}`}
             data-melius-ui-role="metric"
             onClick={() => onOpenPanel(getMetricPanel(metric, copy, language), metric.label[language])}
-            className="group flex min-h-32 items-start gap-3 p-4 text-left transition-colors hover:bg-zinc-950/[0.035] dark:hover:bg-white/[0.045]"
+            className="group flex min-h-32 items-start gap-3 p-4 text-left transition-colors hover:bg-stone-950/[0.035] dark:hover:bg-white/[0.045]"
           >
             <ToneIcon tone={metric.tone} icon={metric.icon} />
             <span className="min-w-0">
@@ -1379,7 +1403,7 @@ function TaskQueue({
 }) {
   return (
     <PanelSurface data-melius-ui-id="overview-task-queue" data-melius-ui-role="section">
-      <div className="flex items-center justify-between gap-3 border-b border-zinc-950/[0.08] p-4 dark:border-white/[0.08]">
+      <div className="flex items-center justify-between gap-3 border-b border-stone-950/[0.12] p-4 dark:border-white/[0.08]">
         <h3 className="font-black text-zinc-950 dark:text-white">{copy.sections.taskQueue}</h3>
         <Badge>{tasks.length}</Badge>
       </div>
@@ -1395,7 +1419,7 @@ function TaskQueue({
                 data-melius-ui-role="button"
                 aria-pressed={completed}
                 onClick={() => onToggleTask(task.id)}
-                className={completed ? 'grid h-9 w-9 place-items-center rounded-lg bg-emerald-600 text-white' : 'grid h-9 w-9 place-items-center rounded-lg bg-zinc-950/[0.06] text-zinc-700 transition hover:bg-zinc-950/[0.10] dark:bg-white/[0.10] dark:text-zinc-200 dark:hover:bg-white/[0.16]'}
+                className={completed ? 'grid h-9 w-9 place-items-center rounded-sm bg-emerald-600 text-white' : 'grid h-9 w-9 place-items-center rounded-sm bg-zinc-950/[0.06] text-zinc-700 transition hover:bg-zinc-950/[0.10] dark:bg-white/[0.10] dark:text-zinc-200 dark:hover:bg-white/[0.16]'}
               >
                 <CheckCircle2 className="h-5 w-5" aria-hidden="true" />
               </button>
@@ -2095,10 +2119,10 @@ function ActionInspector({
     <aside
       data-melius-ui-id="workspace-action-inspector"
       data-melius-ui-role="panel"
-      className="inspector-enter fixed inset-x-3 bottom-3 z-50 max-h-[min(38rem,calc(100svh-1.5rem))] overflow-hidden rounded-lg border border-zinc-950/[0.10] bg-white/[0.96] shadow-2xl shadow-zinc-950/20 backdrop-blur-xl dark:border-white/[0.12] dark:bg-zinc-950/[0.96] sm:inset-x-auto sm:right-4 sm:top-[4.25rem] sm:bottom-4 sm:w-[24rem]"
+      className="inspector-enter fixed inset-x-3 bottom-3 z-50 max-h-[min(38rem,calc(100svh-1.5rem))] overflow-hidden rounded-md border border-stone-950/[0.14] bg-[#fffdf8] shadow-2xl shadow-zinc-950/20 dark:border-white/[0.12] dark:bg-[#11100d] sm:inset-x-auto sm:right-4 sm:top-[4.75rem] sm:bottom-4 sm:w-[24rem]"
     >
       <div className="thin-scrollbar flex max-h-[inherit] flex-col overflow-y-auto">
-        <div className="flex items-start justify-between gap-3 border-b border-zinc-950/[0.08] p-4 dark:border-white/[0.08]">
+        <div className="flex items-start justify-between gap-3 border-b border-stone-950/[0.12] p-4 dark:border-white/[0.08]">
           <div className="flex min-w-0 items-center gap-3">
             <ToneIcon tone={panel.tone ?? 'neutral'} icon={Icon} />
             <div className="min-w-0">
@@ -2126,7 +2150,7 @@ function ActionInspector({
             </div>
           ) : null}
 
-          <div data-melius-ui-id="workspace-action-inspector-meta" data-melius-ui-role="list" className="divide-y divide-zinc-950/[0.08] overflow-hidden rounded-lg border border-zinc-950/[0.08] dark:divide-white/[0.08] dark:border-white/[0.10]">
+          <div data-melius-ui-id="workspace-action-inspector-meta" data-melius-ui-role="list" className="divide-y divide-stone-950/[0.10] overflow-hidden rounded-sm border border-stone-950/[0.12] dark:divide-white/[0.08] dark:border-white/[0.10]">
             {panel.meta.map((item, index) => (
               <div key={`${item.label}-${index}`} data-melius-ui-id={`workspace-action-inspector-meta-${index + 1}`} data-melius-ui-role="list-item" className="flex items-center justify-between gap-3 px-3 py-2.5">
                 <span className="text-xs font-bold uppercase tracking-[0.10em] text-zinc-500 dark:text-zinc-400">{item.label}</span>
@@ -2173,9 +2197,9 @@ function ActionModal({
         data-melius-ui-id="workspace-action-modal"
         data-melius-ui-role="dialog"
         onClick={(event) => event.stopPropagation()}
-        className="modal-enter thin-scrollbar max-h-[min(42rem,calc(100svh-2rem))] w-full max-w-2xl overflow-y-auto rounded-lg border border-zinc-950/[0.10] bg-white/[0.97] shadow-2xl shadow-zinc-950/25 backdrop-blur-xl dark:border-white/[0.12] dark:bg-zinc-950/[0.97]"
+        className="modal-enter thin-scrollbar max-h-[min(42rem,calc(100svh-2rem))] w-full max-w-2xl overflow-y-auto rounded-md border border-stone-950/[0.14] bg-[#fffdf8] shadow-2xl shadow-zinc-950/25 dark:border-white/[0.12] dark:bg-[#11100d]"
       >
-        <div className="flex items-start justify-between gap-3 border-b border-zinc-950/[0.08] p-5 dark:border-white/[0.08]">
+        <div className="flex items-start justify-between gap-3 border-b border-stone-950/[0.12] p-5 dark:border-white/[0.08]">
           <div className="flex min-w-0 items-center gap-3">
             <ToneIcon tone={panel.tone ?? 'neutral'} icon={Icon} />
             <div className="min-w-0">
@@ -2214,7 +2238,7 @@ function ActionModal({
             </div>
           </div>
 
-          <div data-melius-ui-id="workspace-action-modal-meta" data-melius-ui-role="list" className="divide-y divide-zinc-950/[0.08] overflow-hidden rounded-lg border border-zinc-950/[0.08] bg-zinc-950/[0.025] dark:divide-white/[0.08] dark:border-white/[0.10] dark:bg-white/[0.04]">
+          <div data-melius-ui-id="workspace-action-modal-meta" data-melius-ui-role="list" className="divide-y divide-stone-950/[0.10] overflow-hidden rounded-sm border border-stone-950/[0.12] bg-stone-950/[0.025] dark:divide-white/[0.08] dark:border-white/[0.10] dark:bg-white/[0.04]">
             {panel.meta.map((item, index) => (
               <div key={`${item.label}-${index}`} data-melius-ui-id={`workspace-action-modal-meta-${index + 1}`} data-melius-ui-role="list-item" className="px-3 py-3">
                 <div className="text-xs font-bold uppercase tracking-[0.10em] text-zinc-500 dark:text-zinc-400">{item.label}</div>
@@ -2235,11 +2259,11 @@ function WorkspaceToast({ notice, raised, onDismiss }: { notice: NoticeState; ra
       data-melius-ui-role="status"
       className={
         raised
-          ? 'toast-enter fixed inset-x-3 top-16 z-[60] flex items-start gap-3 rounded-lg border border-zinc-950/[0.10] bg-white/[0.96] p-3 shadow-xl shadow-zinc-950/15 backdrop-blur-xl dark:border-white/[0.12] dark:bg-zinc-950/[0.96] sm:inset-x-auto sm:left-auto sm:right-4 sm:top-auto sm:bottom-3 sm:w-[22rem]'
-          : 'toast-enter fixed inset-x-3 bottom-3 z-[60] flex items-start gap-3 rounded-lg border border-zinc-950/[0.10] bg-white/[0.96] p-3 shadow-xl shadow-zinc-950/15 backdrop-blur-xl dark:border-white/[0.12] dark:bg-zinc-950/[0.96] sm:left-auto sm:right-4 sm:w-[22rem]'
+          ? 'toast-enter fixed inset-x-3 top-16 z-[60] flex items-start gap-3 rounded-md border border-stone-950/[0.14] bg-[#fffdf8] p-3 shadow-xl shadow-zinc-950/15 dark:border-white/[0.12] dark:bg-[#11100d] sm:inset-x-auto sm:left-auto sm:right-4 sm:top-auto sm:bottom-3 sm:w-[22rem]'
+          : 'toast-enter fixed inset-x-3 bottom-3 z-[60] flex items-start gap-3 rounded-md border border-stone-950/[0.14] bg-[#fffdf8] p-3 shadow-xl shadow-zinc-950/15 dark:border-white/[0.12] dark:bg-[#11100d] sm:left-auto sm:right-4 sm:w-[22rem]'
       }
     >
-      <span className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-emerald-100 text-emerald-800 dark:bg-emerald-300/[0.14] dark:text-emerald-200">
+      <span className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-sm bg-emerald-100 text-emerald-800 dark:bg-emerald-300/[0.14] dark:text-emerald-200">
         <CheckCircle2 className="h-4 w-4" aria-hidden="true" />
       </span>
       <div className="min-w-0 flex-1">
@@ -2551,12 +2575,12 @@ function App() {
             </div>
           </WorkspaceHeader>
 
-          <main data-melius-ui-id="workspace-main" data-melius-ui-role="main" className="thin-scrollbar min-h-0 flex-1 overflow-y-auto p-4 sm:p-5">
+          <main data-melius-ui-id="workspace-main" data-melius-ui-role="main" className="thin-scrollbar min-h-0 flex-1 overflow-y-auto p-4 sm:p-5 xl:p-6">
             <div className="mb-5 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
               <div
                 data-melius-ui-id="workspace-tabs"
                 data-melius-ui-role="tabs"
-                className="grid w-full grid-cols-5 rounded-lg bg-zinc-950/[0.06] p-1 dark:bg-white/[0.08] lg:max-w-[620px]"
+                className="thin-scrollbar flex w-full items-center gap-6 overflow-x-auto border-b border-stone-950/[0.14] dark:border-white/[0.10] lg:max-w-[680px]"
               >
                 {tabs.map((tab) => (
                   <TabButton
