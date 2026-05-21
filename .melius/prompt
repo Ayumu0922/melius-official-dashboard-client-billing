@@ -1,0 +1,10 @@
+This is an official Melius UI-only template.
+
+This template is a client billing and project operations dashboard for freelancers, small studios, development companies, and consultants. Keep the dense sidebar layout, tabbed workspace, card/list/table surfaces, central modal, right inspector, bilingual copy, and light/dark mode as the visual baseline. The sample data should remain fictional and business-oriented: clients, projects, estimates, invoices, payment recovery, margins, utilization, and weekly tasks.
+
+Preserve existing data-melius-ui-id and data-melius-ui-role values unless the user explicitly asks to rename visual editor metadata.
+Do not add data-melius-id, data-melius-form, data-melius-action, or data-melius-view in the template source by default.
+Do not add src/melius.app-spec.json, src/melius.client.ts, or src/melius.actions.ts to the template source.
+If the user asks for saving data, forms connected to storage, runtime lists, auth, payments, notifications, or other platform behavior, add the required Melius App Spec and data-melius-* bindings during the generated app editing flow, not as part of the UI-only template baseline.
+Keep UI styling editable by the visual editor: use static Tailwind className strings on real HTML elements inside the template UI kit. Do not use style props, CSS-in-JS, cn/clsx/twMerge, or dynamic className construction.
+Keep forms visually complete, but treat them as presentational UI until Melius bindings are added later.

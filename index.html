@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <meta
+      name="description"
+      content="A Melius UI-only client billing dashboard template for freelancers and small service teams, with overview KPIs, clients, projects, invoices, reports, bilingual copy, and light/dark mode."
+    />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23181716'/%3E%3Cpath d='M18 18h28v28H18z' fill='none' stroke='%23f5f5f4' stroke-width='4'/%3E%3Cpath d='M23 29h18M23 37h12' stroke='%2397a36d' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M23 21v8h18v-8' fill='%23d6a84f' opacity='.9'/%3E%3C/svg%3E" />
+    <script>
+      (() => {
+        const key = 'melius-official-dashboard-client-billing-theme';
+        const languageKey = 'melius-official-dashboard-client-billing-language';
+        const root = document.documentElement;
+        const params = new URLSearchParams(window.location.search);
+        const requestedLanguage = params.get('locale') || params.get('lang') || params.get('language') || params.get('melius_locale');
+        let language = requestedLanguage === 'ja' || requestedLanguage === 'en' ? requestedLanguage : 'en';
+        const requestedTheme = params.get('theme') || params.get('themeMode') || params.get('colorScheme') || params.get('melius_theme');
+        let mode = requestedTheme === 'light' || requestedTheme === 'dark' || requestedTheme === 'system' ? requestedTheme : 'system';
+
+        try {
+          if (requestedTheme !== 'light' && requestedTheme !== 'dark' && requestedTheme !== 'system') {
+            const stored = localStorage.getItem(key);
+            if (stored === 'light' || stored === 'dark' || stored === 'system') {
+              mode = stored;
+            }
+          }
+
+          if (requestedLanguage !== 'ja' && requestedLanguage !== 'en') {
+            const storedLanguage = localStorage.getItem(languageKey);
+            if (storedLanguage === 'ja' || storedLanguage === 'en') {
+              language = storedLanguage;
+            }
+          }
+        } catch {
+          mode = requestedTheme === 'light' || requestedTheme === 'dark' || requestedTheme === 'system' ? requestedTheme : 'system';
+        }
+
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const isDark = mode === 'dark' || (mode === 'system' && prefersDark);
+        const resolved = isDark ? 'dark' : 'light';
+        root.classList.toggle('dark', isDark);
+        root.dataset.theme = resolved;
+        root.dataset.themePreference = mode;
+        root.lang = language;
+        root.style.colorScheme = resolved;
+      })();
+    </script>
+    <title>Ledger Desk Client Billing Dashboard</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,7 @@
+package.json
+index.html
+vite.config.ts
+tailwind.config.ts
+postcss.config.cjs
+tsconfig.json
+src/main.tsx
